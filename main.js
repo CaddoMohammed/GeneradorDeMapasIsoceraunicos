@@ -162,14 +162,14 @@ function calcular(){
 	spinner["classList"].remove("hidden");
 	fetch(`${Servidor}/generar-mapa-isoceraunico`,{method:"POST",headers:{"Content-Type":"application/json",},body:JSON.stringify(z)})
 	.then(u => {
-		btn["disabled"] = false;
-		btn["classList"].remove("bg-blue-400","dark:bg-blue-500","cursor-not-allowed");
-		label["innerHTML"] = "Calcular";
-		spinner["classList"].add("hidden");
 		return u.json();
 	})
 	.then(v => {
 		Mostrar();
+		btn["disabled"] = false;
+		btn["classList"].remove("bg-blue-400","dark:bg-blue-500","cursor-not-allowed");
+		label["innerHTML"] = "Calcular";
+		spinner["classList"].add("hidden");
 		resultados = v;
 		let tx = db.transaction("mapas","readwrite");
 		let store = tx.objectStore("mapas");
